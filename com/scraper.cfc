@@ -26,6 +26,10 @@
 							parsedHTML  = parsedHTML & blocks.lastquery.I_TAG_FULL[i];
 						}
 				}
+			else
+				{
+					parsedHTML  = "<p>No results found</p>";
+				}
 			
 		
 			return SerializeJSON(parsedHTML);
@@ -64,13 +68,11 @@
 		
 	</cffunction>
 	
-	<cffunction name="getCities" access="remote" output="false" returntype="String" returnformat="JSON" hint="">
-		<cfargument name="url" type="string" required="false" default="">
-		
+	<cffunction name="getCities" access="remote" output="false" returntype="String" returnformat="JSON" hint="">		
 		<cfscript>
 			var object			=	CreateObject("component","craigslist.sparser.sparser2");
-			var parser			=	object.init(Arguments.url);
-			var blocks			=	parser.selector("p.row");
+			var parser			=	object.init('http://www.craigslist.org/about/sites');
+			var blocks			=	parser.selector("div.colmask");
 			var i 				=	'';
 			var parsedHTML		=	'';
 			
@@ -86,4 +88,8 @@
 		</cfscript>
 		
 	</cffunction>
+	
+	
+	
+	
 </cfcomponent>
