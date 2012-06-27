@@ -108,35 +108,25 @@ border-radius: 4px;
           </div>--->
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-			  <li><a href="#" onclick="$('#modalSearch').modal('toggle');">Search</a></li>
-			  <li><a href="#" onclick="$('#modalCities').modal('toggle');" id="curSiteURL"></a></li>
+              <li class="active"><a href="#"><i class="icon-home icon-white"></i>&nbsp;Home</a></li>
+              <!---<li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>--->
+			  <li><a href="#" onclick="$('#modalSearch').modal('toggle');"><i class="icon-search icon-white"></i>&nbsp;Search</a></li>
+			  <li><a href="#" onclick="$('#modalCities').modal('toggle');" id="curSiteURL" title="Click to change city"></a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-	<div class="row">
+	<div class="row" id="subNavArea">
 		<div class="subnav subnav-fixed">
 	      <ul class="nav nav-pills">
-	        <li class="active"><a href="#javascript">All plugins</a></li>
-	        <li class=""><a href="#modals">Modal</a></li>
-	        <li class=""><a href="#dropdowns">Dropdown</a></li>
-	        <li><a href="#scrollspy">Scrollspy</a></li>
-	        <li><a href="#tabs">Tab</a></li>
-	        <li><a href="#tooltips">Tooltip</a></li>
-	        <li><a href="#popovers">Popover</a></li>
-	        <li><a href="#alerts">Alert</a></li>
-	        <li><a href="#buttons">Button</a></li>
-	        <li><a href="#collapse">Collapse</a></li>
-	        <li><a href="#carousel">Carousel</a></li>
-	        <li><a href="#typeahead">Typeahead</a></li>
+	        <li class="active"><a href="#javascript">Subnav A</a></li>
+	        <li class=""><a href="#modals">Subnav B</a></li>
 	      </ul>
 	    </div>
-	</div>
-	<div class="row">&nbsp;</div><div class="row">&nbsp;</div>
+	</div>--->
+	<div class="row">&nbsp;</div>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span4" id="searchResults" style="min-height: 500px; overflow: auto;"></div><!--/span-->
@@ -307,7 +297,7 @@ border-radius: 4px;
     <script type="text/javascript">
     //global vars 
 	var currentSiteURL = "http://phoenix.craigslist.org";
-	$('#curSiteURL').html(currentSiteURL);
+	setSiteURL(currentSiteURL);
 	//onload functions
 		$(document).ready(function() {
 		/* START onload */
@@ -369,7 +359,7 @@ border-radius: 4px;
 							});
 
 						//override the native click function of the a tag in the pagination results
-						$('.row a').each(function(index) {
+						$('#searchResults .row a').each(function(index) {
 							if(index==0)
 								{
 									loadDetails($(this).attr('href'));
@@ -381,7 +371,7 @@ border-radius: 4px;
 						});
 						
 						//change out the row class with an innocuous one not affected by bootstrap
-						$('p.row').each(function(index) {
+						$('#searchResults p.row').each(function(index) {
 							$(this).attr('class','item')
 						});
 						
@@ -391,7 +381,6 @@ border-radius: 4px;
 		function loadDetails(url)
 			{
 				//listingDetails
-				console.log('You clicked on: ' + url);
 				$.ajax({
 					url: 'com/scraper.cfc',
 					data: {
@@ -402,7 +391,6 @@ border-radius: 4px;
 					type: 'GET',
 					dataType: 'json',
 					success: function(data) {
-						console.log(url);
 						$('#listingDetails').html(data);
 					}
 				});
@@ -417,8 +405,8 @@ border-radius: 4px;
 		function setSiteURL(url)
 			{
 				currentSiteURL = url;
-				$('#modalSearch').modal('toggle');
-				$('#curSiteURL').html(currentSiteURL);
+				$('#modalSearch').modal('toggle');				
+				$('#curSiteURL').html('<i class="icon-map-marker icon-white"></i>&nbsp;' + currentSiteURL);
 			}
 		function loadCities()
 			{
