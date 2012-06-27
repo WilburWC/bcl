@@ -297,7 +297,6 @@ border-radius: 4px;
     <script type="text/javascript">
     //global vars 
 	var currentSiteURL = "http://phoenix.craigslist.org";
-	setSiteURL(currentSiteURL);
 	//onload functions
 		$(document).ready(function() {
 		/* START onload */
@@ -318,7 +317,7 @@ border-radius: 4px;
 					return false;
 				});
 			//pop open the search form
-			$('#modalSearch').modal('toggle');
+			setSiteURL(currentSiteURL);
 			//make sure the display divs are the right height for this browser
 			$(window).resize(function(){
 	            stretchPanels();
@@ -405,7 +404,7 @@ border-radius: 4px;
 		function setSiteURL(url)
 			{
 				currentSiteURL = url;
-				$('#modalSearch').modal('toggle');				
+				$('#modalSearch').modal('show');				
 				$('#curSiteURL').html('<i class="icon-map-marker icon-white"></i>&nbsp;' + currentSiteURL);
 			}
 		function loadCities()
